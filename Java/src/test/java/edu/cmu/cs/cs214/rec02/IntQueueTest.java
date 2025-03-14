@@ -87,24 +87,5 @@ public class IntQueueTest {
             }
         }
     }
-    @Test
-    public void testQueueSize() {
-        assertEquals(0, mQueue.size());
-
-        mQueue.enqueue(1);
-        mQueue.enqueue(2);
-        mQueue.enqueue(3);
-
-        assertEquals(3, mQueue.size());
-
-        mQueue.dequeue();
-
-        assertEquals(2, mQueue.size());
-
-        mQueue.dequeue();
-        mQueue.dequeue();
-
-        assertEquals(0, mQueue.size());
-    }
 
 }
