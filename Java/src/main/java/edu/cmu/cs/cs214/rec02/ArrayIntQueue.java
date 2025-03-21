@@ -73,11 +73,14 @@ public class ArrayIntQueue implements IntQueue {
 
     /** {@inheritDoc} */
     public boolean isEmpty() {
-        return size >= 0;
+        return size == 0;  // Fixed this condition
     }
 
     /** {@inheritDoc} */
     public Integer peek() {
+        if (isEmpty()) {  // Handle empty case
+            return null;
+        }
         return elementData[head];
     }
 
@@ -95,12 +98,12 @@ public class ArrayIntQueue implements IntQueue {
             int oldCapacity = elementData.length;
             int newCapacity = 2 * oldCapacity + 1;
             int[] newData = new int[newCapacity];
-            for (int i = head; i < oldCapacity; i++) {
-                newData[i - head] = elementData[i];
+            
+            // Correct handling of wraparound
+            for (int i = 0; i < size; i++) {
+                newData[i] = elementData[(head + i) % oldCapacity];
             }
-            for (int i = 0; i < head; i++) {
-                newData[head - i] = elementData[i];
-            }
+
             elementData = newData;
             head = 0;
         }
